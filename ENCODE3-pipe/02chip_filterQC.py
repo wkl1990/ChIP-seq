@@ -5,7 +5,7 @@
 #Date: 2018/04/04
 #Examples: python3 chip_filterQC.py  --in="R1.bam" --pair=False, --scrub=False, --picard="1.119" --samtools_params="-q 30" --samtools="1.2" --debug=False
 
-
+from __future__ import print_function
 import os
 import re
 import subprocess
@@ -15,7 +15,6 @@ import getopt
 import logging
 from multiprocessing import Pool
 from pprint import pprint, pformat
-from __future__ import print_function
 import sys
 sys.path.insert(1,"/zs32_2/klwang/ChIP_seq/test_data/ENCODE_code")
 import common
@@ -178,7 +177,7 @@ def shell_command(command_string):
     except:
         raise
 
-def scrub(in_filepath, out_filepath):
+def scrub_fun(in_filepath, out_filepath):
     # Check the input.
     logger.debug("Input flagstat for %s" % (in_filepath))
     logger.debug(shell_command("samtools flagstat %s" % (in_filepath)))
@@ -224,7 +223,7 @@ def scrub_main(input_bams):
         in_path = os.path.join(bam)
         out_path = os.path.join(dirname, "scrub-" + filename)
         out_paths.append(out_path)
-        pool.apply_async(scrub, (in_path, out_path))
+        pool.apply_async(scrub_fun, (in_path, out_path))
     # Close the worker pool and block until all jobs are complete.
     pool.close()
     pool.join()

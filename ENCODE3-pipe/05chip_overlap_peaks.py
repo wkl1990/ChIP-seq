@@ -646,9 +646,10 @@ def main(rep1_peaks, rep2_peaks, pooled_peaks,
         output.update({"rep2_signal": rep2_signal})
     if pooled_signal:
         output.update({"pooled_signal": pooled_signal})
-    finalpeaks_dirname = 'peaks_macs'
+
+    finalpeaks_dirname = rep1_peaks.split("/")[0]
     prefix = "final"
-    peak_file = "%s/%s.peaksfile" % (finalpeaks_dirname, prefix) 
+    peak_file = "%s/%s.%s.peaksfile" % (finalpeaks_dirname, prefix, peak_type,) 
     with open(peak_file,"w") as fh:
         for key, val in output.items():
             if isinstance(val, list):

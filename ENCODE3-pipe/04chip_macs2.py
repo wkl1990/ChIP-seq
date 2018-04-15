@@ -112,11 +112,11 @@ def macs2(experiment, control, xcor_scores_input, chrom_sizes,
          narrowpeak_as, gappedpeak_as, broadpeak_as, genomesize, prefix=None,
          fragment_length=None):
     # Define the output filenames
-    peaks_dirname = 'peaks_macs'
+    peaks_dirname = '%s_%s_peaks_macs' % (experiment.split("/")[-1].split(".")[0], control.split("/")[-1].split(".")[0])
     if not os.path.exists(peaks_dirname):
         os.makedirs(peaks_dirname)
     if not prefix:
-        prefix = experiment
+        prefix = experiment.split("/")[-1]
     if prefix.endswith('.gz'):
         prefix = prefix[:-3]
     narrowPeak_fn    = "%s/%s.narrowPeak" % (peaks_dirname, prefix)
@@ -739,7 +739,7 @@ def main(rep1_ta, ctl1_ta, rep1_xcor, rep1_paired_end, chrom_sizes, genomesize,
             'pooledpr2_fc_signal':      pooledpr2_peaks_subjob.get("fc_signal"),
             'pooledpr2_pvalue_signal':  pooledpr2_peaks_subjob.get("pvalue_signal")
         })
-    peaks_dirname = 'peaks_macs'
+    peaks_dirname = '%s_%s_peaks_macs' % (rep1_ta_filename.split("/")[-1].split(".")[0], ctl1_ta_filename.split("/")[-1].split(".")[0])
     prefix = rep1_ta_filename.split("/")[-1]
     peak_file = "%s/%s.peaksfile" % (peaks_dirname, prefix) 
     with open(peak_file,"w") as fh:

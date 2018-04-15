@@ -186,7 +186,7 @@ def crop(reads1_file, reads2_file, crop_length, debug):
             output_rev_paired_filename,
             output_rev_unpaired_filename,
             'ILLUMINACLIP:%s' % (adapter), 
-            'LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:25',]
+            'LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:35',]
             #'MINLEN:%s' % (crop_length),
             #'CROP:%s' % (crop_length)]
             if s])

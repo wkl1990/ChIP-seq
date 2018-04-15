@@ -13,6 +13,7 @@ import shlex
 from multiprocessing import cpu_count
 import dxpy
 import logging
+from pprint import pprint, pformat
 import sys
 sys.path.insert(1,"/zs32_2/klwang/ChIP_seq/test_data/ENCODE_code")
 import common
